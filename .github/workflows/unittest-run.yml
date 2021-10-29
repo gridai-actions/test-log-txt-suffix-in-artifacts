@@ -3,6 +3,7 @@ on:
   push:
     paths:
     - 'run.py'
+    - 'unittest-run.yml'
 
 jobs:
   unittests:
