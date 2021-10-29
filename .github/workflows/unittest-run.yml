@@ -2,8 +2,8 @@ name: 'run.py'
 on:
   push:
     paths:
-    - 'run.py'
-    - 'unittest-run.yml'
+      - 'run.py'
+      - 'unittest-run.yml'
 
 jobs:
   unittests:
