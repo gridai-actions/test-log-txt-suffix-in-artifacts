@@ -1,4 +1,6 @@
-# gridai-run-template
+# Issue
+
+Artifacts with .log extension were missing from some of the runs.
 
 ## Expectations
 5 x 3 x 2 = 30 experiments
