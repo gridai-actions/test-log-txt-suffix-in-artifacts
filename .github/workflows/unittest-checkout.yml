@@ -2,7 +2,7 @@ name: 'run.py'
 on:
   push:
     paths:
-      - run.py
+    - 'run.py'
 
 jobs:
   unittests:
