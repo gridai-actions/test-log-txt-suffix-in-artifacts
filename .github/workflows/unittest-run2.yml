@@ -2,7 +2,8 @@ name: 'run2.py'
 on:
   push:
     paths:
-      - 'run2.py'
+      - run2.py
+      - .github/workflows/unittest-run2.yml
 
 jobs:
   unittests:

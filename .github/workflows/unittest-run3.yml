@@ -2,7 +2,7 @@ name: 'run3.py'
 on:
   push:
     paths:
-      - run.py
+      - run3.py
       - .github/workflows/unittest-run3.yml
 
 jobs:
