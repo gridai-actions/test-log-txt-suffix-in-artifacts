@@ -1,0 +1,30 @@
+name: 'Grid.ai Run Template'
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  unittests:
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        os: [ubuntu-latest] 
+        python-version: [3.8]        
+        python-venv: [""]        
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v2     
+      - uses: gridai-actions/gridai-login@main
+        with:
+          python-version: ${{ matrix.python-version }}
+          python-venv: ${{ matrix.python-venv }}
+          gridai-username: ${{ secrets.GRIDAI_USERNAME }} 
+          gridai-key: ${{ secrets.GRIDAI_KEY }}
+      - uses: gridai-actions/gridai-run@main
+        with:
+          script-args: --extension "['txt', 'log', 'hello', 'log2', 'xyz']" --sleep "[0, 60, 120]" --close_file "[0,1]"
+          script-name: run2.py
