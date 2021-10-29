@@ -1,4 +1,4 @@
-name: 'Grid.ai Run Template'
+name: 'run.py'
 on:
   push:
     paths:
@@ -26,3 +26,9 @@ jobs:
       - uses: gridai-actions/gridai-run@main
         with:
           script-name: run.py
+      - run: |
+          cd ${GITHUB_WORKSPACE}
+          find grid_artifacts -name "*.log"
+          $count_log=$(find grid_artifacts -name "*.log" | wc -l)
+          if [ "${count_log}" -eq 0 ]; then exit 1; fi
+

@@ -1,4 +1,4 @@
-name: 'Grid.ai Run Template'
+name: 'run2.py'
 on:
   push:
     paths:
@@ -27,3 +27,8 @@ jobs:
         with:
           script-args: --extension "['txt', 'log', 'hello', 'log2', 'xyz']" --sleep "[0, 60, 120]" --close_file "[0,1]"
           script-name: run2.py
+      - run: |
+          cd ${GITHUB_WORKSPACE}
+          find grid_artifacts -name "*.log"
+          $count_log=$(find grid_artifacts -name "*.log" | wc -l)
+          if [ "${count_log}" -eq 0 ]; then exit 1; fi
