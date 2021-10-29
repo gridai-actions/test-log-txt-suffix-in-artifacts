@@ -1,9 +1,9 @@
-name: 'run.py'
+name: 'run3.py'
 on:
   push:
     paths:
       - run.py
-      - .github/workflows/unittest-run.yml
+      - .github/workflows/unittest-run3.yml
 
 jobs:
   unittests:
@@ -26,7 +26,7 @@ jobs:
           gridai-key: ${{ secrets.GRIDAI_KEY }}
       - uses: gridai-actions/gridai-run@main
         with:
-          script-name: run.py
+          script-name: run3.py
       - run: |
           cd ${GITHUB_WORKSPACE}
           echo file count with extensions
