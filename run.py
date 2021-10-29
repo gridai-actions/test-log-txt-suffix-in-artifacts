@@ -45,7 +45,7 @@ with open("results.pt", "w") as outf:
     outf.write("Success with results.pt!\n")
 outf.close()
 
-# write some artifacts
+# write some artifacts with .log at the end
 f = open("weights.log", "a")
 f.write("fake weights")
 f.close()
