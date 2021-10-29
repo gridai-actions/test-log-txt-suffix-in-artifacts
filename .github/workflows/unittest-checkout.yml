@@ -29,6 +29,6 @@ jobs:
       - run: |
           cd ${GITHUB_WORKSPACE}
           find grid_artifacts -name "*.log"
-          $count_log=$(find grid_artifacts -name "*.log" | wc -l)
+          count_log=$(find grid_artifacts -name "*.log" | wc -l)
           if [ "${count_log}" -eq 0 ]; then exit 1; fi
 
