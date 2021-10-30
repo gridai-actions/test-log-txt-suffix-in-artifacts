@@ -36,4 +36,5 @@ jobs:
           find grid_artifacts -name "*.*"  | awk -F. '{print $NF}' | sort | uniq -c | tee extension.count
           echo assert by expected file count
           count_log_suffix=$(awk '$2=="log" {print $1}' extension.count)
-          if [ ! -z "${count_log_suffix}" -a "${count_log_suffix}" -ne 6 ]; then exit 1; fi
+          if [ -z "${count_log_suffix}" ]; then exit 1; fi
+          if [ "${count_log_suffix}" -ne 6 ]; then exit 1; fi
