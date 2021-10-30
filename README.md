@@ -1,12 +1,18 @@
-# Issue
+## 🐛 Bug
 
-Artifacts with .log extension were missing from some of the runs.
+Artifacts with .log extension are missing if there are no subsequent artifacts generated. 
 
-# Observations
+### Expected behavior
 
-When .log file is written and it is the last artifact, this file is not present in saved artifacts
+All artifacts are present from  `grid artifacts` 
 
-# Test Case
+### Current behavior
+
+A run with .log generated on the last step will not have that artifact available via `grid artifacts` command.
+
+### To Reproduce
+
+Steps to reproduce the issue as follows:
 
 | Test | Expected Results | Actual Results | Script | Runner | Run |
 | -- | -- | -- | -- | -- | -- |
@@ -53,3 +59,14 @@ file count group by extensions
       1 log
       2 pt
 ```
+
+### Environment
+
+ - OS (e.g., Windows): Ubuntu
+ - Browser (e.g., Chrome, Safari): N/A
+ - CLI version: 
+ - Python version: 3.8 
+
+### Additional context
+
+N/A
