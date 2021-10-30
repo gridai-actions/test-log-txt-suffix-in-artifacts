@@ -40,8 +40,44 @@ file count group by extensions
 assert by expected file count
 ```
 
+[log](https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/runs/4052467716?check_suite_focus=true) show no .log files
+
 ## run2.py
 
+
+```
+list of artifacts
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp0/results.txt
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp1/results.txt
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp10/results.hello
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp11/results.hello
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp12/results.txt
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp13/results.txt
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp14/results.log2
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp15/results.txt
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp16/results.log2
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp17/results.log2
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp19/results.xyz
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp2/results.hello
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp20/results.hello
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp21/results.hello
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp22/results.log2
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp24/results.log2
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp25/results.xyz
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp26/results.hello
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp28/results.log2
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp29/results.xyz
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp3/results.xyz
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp6/results.xyz
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp8/results.txt
+grid_artifacts/rebel-bardeen-2144/rebel-bardeen-2144-exp9/results.xyz
+file count group by extensions
+      6 hello
+      6 log2
+      6 txt
+      6 xyz
+assert by expected file count
+```
 
 ## run3.py
 
