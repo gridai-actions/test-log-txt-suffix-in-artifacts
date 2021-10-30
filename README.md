@@ -2,66 +2,54 @@
 
 Artifacts with .log extension were missing from some of the runs.
 
-## Expectations
-5 x 3 x 2 = 30 experiments
-script-args: --extension "['txt', 'log', 'hello', 'log2', 'xyz']" --sleep "[0, 60, 120]" --close_file "[0,1]"
+# Observations
 
-https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/runs/4049681176?check_suite_focus=true
+When .log file is written and it is the last artifact, this file is not present in saved artifacts
 
-## Run
+# Test Case
+
+| Test | Expected Results | Actual Results | Script | Runner | Run |
+| -- | -- | -- | -- | -- | -- |
+| at end, write weights.log then results.log | both .log files are present | the last .log is missing | [run.py](./run.py) | [unittest-run.yml](./.github/workflows/unittest-run.yml) | [![run.py](https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/actions/workflows/unittest-run.yml/badge.svg)](https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/actions/workflows/unittest-run.yml) |
+| at end, HPO run `--extension "['txt', 'log', 'hello', 'log2', 'xyz']" --sleep "[0, 60, 120]" --close_file "[0,1]"` | all 6 .log files are present | no .log files are present but all other extensions are ok | [run2.py](./run2.py) | [unittest-run2.yml](./.github/workflows/unittest-run2.yml) | [![run2.py](https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/actions/workflows/unittest-run2.yml/badge.svg)](https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/actions/workflows/unittest-run2.yml) |
+| write weights.log then results.log then some more artifacts| both .log files are present | all artifacts are found including the two .log files are present| [run.py](./run.py) | [unittest-run.yml](./.github/workflows/unittest-run.yml) | [![run3.py](https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/actions/workflows/unittest-run3.yml/badge.svg)](https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/actions/workflows/unittest-run3.yml) |
+
+# Evidence
+
+## run.py
+
+[log](https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/runs/4052318275?check_suite_focus=true) show only   
+ `1 log` (1 file with .log extension)
 
 ```
-cat > run2.py.log <<EOF
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┓
-┃ Experiment               ┃  Command ┃    Status ┃ Queued Duration ┃ Run Duration ┃ extension, ┃ sleep, ┃ close_file, ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━┩
-│ antique-elion-9796-exp5  │ run2.py, │ succeeded │     0d-00:04:21 │  0d-00:02:42 │       log, │     0, │          0] │
-│ antique-elion-9796-exp2  │ run2.py, │ succeeded │     0d-00:03:47 │  0d-00:02:40 │      log2, │     0, │          0] │
-│ antique-elion-9796-exp9  │ run2.py, │ succeeded │     0d-00:04:10 │  0d-00:02:39 │     hello, │     0, │          0] │
-│ antique-elion-9796-exp13 │ run2.py, │ succeeded │     0d-00:04:10 │  0d-00:03:50 │       txt, │   120, │          0] │
-│ antique-elion-9796-exp8  │ run2.py, │ succeeded │     0d-00:05:25 │  0d-00:02:42 │       txt, │    60, │          0] │
-│ antique-elion-9796-exp12 │ run2.py, │ succeeded │     0d-00:04:21 │  0d-00:03:47 │       xyz, │   120, │          1] │
-│ antique-elion-9796-exp1  │ run2.py, │ succeeded │     0d-00:04:10 │  0d-00:03:53 │     hello, │   120, │          0] │
-│ antique-elion-9796-exp14 │ run2.py, │ succeeded │     0d-00:04:10 │  0d-00:03:56 │      log2, │   120, │          0] │
-│ antique-elion-9796-exp3  │ run2.py, │ succeeded │     0d-00:03:58 │  0d-00:02:57 │     hello, │    60, │          1] │
-│ antique-elion-9796-exp16 │ run2.py, │ succeeded │     0d-00:03:48 │  0d-00:02:39 │      log2, │     0, │          1] │
-│ antique-elion-9796-exp11 │ run2.py, │ succeeded │     0d-00:04:53 │  0d-00:02:43 │      log2, │    60, │          1] │
-│ antique-elion-9796-exp6  │ run2.py, │ succeeded │     0d-00:04:11 │  0d-00:02:46 │       xyz, │     0, │          0] │
-│ antique-elion-9796-exp10 │ run2.py, │ succeeded │     0d-00:03:59 │  0d-00:03:57 │     hello, │   120, │          1] │
-│ antique-elion-9796-exp0  │ run2.py, │ succeeded │     0d-00:04:10 │  0d-00:02:54 │     hello, │    60, │          0] │
-│ antique-elion-9796-exp15 │ run2.py, │ succeeded │     0d-00:03:56 │  0d-00:02:44 │       xyz, │     0, │          1] │
-│ antique-elion-9796-exp4  │ run2.py, │ succeeded │     0d-00:04:44 │  0d-00:02:44 │       txt, │     0, │          0] │
-│ antique-elion-9796-exp7  │ run2.py, │ succeeded │     0d-00:04:21 │  0d-00:02:53 │       log, │    60, │          1] │
-│ antique-elion-9796-exp25 │ run2.py, │ succeeded │     0d-00:04:21 │  0d-00:03:48 │       xyz, │   120, │          0] │
-│ antique-elion-9796-exp28 │ run2.py, │ succeeded │     0d-00:04:11 │  0d-00:03:51 │      log2, │   120, │          1] │
-│ antique-elion-9796-exp21 │ run2.py, │ succeeded │     0d-00:04:10 │  0d-00:02:45 │       log, │     0, │          1] │
-│ antique-elion-9796-exp27 │ run2.py, │ succeeded │     0d-00:04:11 │  0d-00:02:50 │       txt, │    60, │          1] │
-│ antique-elion-9796-exp26 │ run2.py, │ succeeded │     0d-00:04:43 │  0d-00:02:58 │       xyz, │    60, │          0] │
-│ antique-elion-9796-exp24 │ run2.py, │ succeeded │     0d-00:04:42 │  0d-00:03:54 │       log, │   120, │          0] │
-│ antique-elion-9796-exp18 │ run2.py, │ succeeded │     0d-00:04:11 │  0d-00:03:57 │       log, │   120, │          1] │
-│ antique-elion-9796-exp19 │ run2.py, │ succeeded │     0d-00:04:21 │  0d-00:02:35 │     hello, │     0, │          1] │
-│ antique-elion-9796-exp29 │ run2.py, │ succeeded │     0d-00:05:24 │  0d-00:03:40 │       txt, │   120, │          1] │
-│ antique-elion-9796-exp22 │ run2.py, │ succeeded │     0d-00:04:43 │  0d-00:02:59 │       log, │    60, │          0] │
-│ antique-elion-9796-exp17 │ run2.py, │ succeeded │     0d-00:04:21 │  0d-00:02:35 │       txt, │     0, │          1] │
-│ antique-elion-9796-exp23 │ run2.py, │ succeeded │     0d-00:03:59 │  0d-00:02:55 │       xyz, │    60, │          1] │
-│ antique-elion-9796-exp20 │ run2.py, │ succeeded │     0d-00:04:42 │  0d-00:02:52 │      log2, │    60, │          0] │
-└──────────────────────────┴──────────┴───────────┴─────────────────┴──────────────┴────────────┴────────┴─────────────┘
-EOF
-grep "log," run2.py.log | grep '1]'
-
-│ antique-elion-9796-exp7  │ run2.py, │ succeeded │     0d-00:04:21 │  0d-00:02:53 │       log, │    60, │          1] │
-│ antique-elion-9796-exp21 │ run2.py, │ succeeded │     0d-00:04:10 │  0d-00:02:45 │       log, │     0, │          1] │
-│ antique-elion-9796-exp18 │ run2.py, │ succeeded │     0d-00:04:11 │  0d-00:03:57 │       log, │   120, │          1] 
+list of artifacts
+grid_artifacts/proficient-hertz-137/proficient-hertz-137-exp0/lightning_logs/hello/events.out.tfevents.1635551954.exp-01fk77rx6pv7z9pdx8yxahm7e5.14.0
+grid_artifacts/proficient-hertz-137/proficient-hertz-137-exp0/results.pt
+grid_artifacts/proficient-hertz-137/proficient-hertz-137-exp0/weights.log
+grid_artifacts/proficient-hertz-137/proficient-hertz-137-exp0/weights.pt
+file count group by extensions
+      1 0
+      1 log
+      2 pt
+assert by expected file count
 ```
 
-## Run
+## run2.py
 
-6 runs did not produce an artifacts 
+
+## run3.py
+
+[log](https://github.com/gridai-actions/test-log-txt-suffix-in-artifacts/runs/4052318205?check_suite_focus=true) show only   
+ `1 log` (1 file with .log extension)
+
 ```
-grid artifacts antique-elion-9796
-cd grid_artifacts
-ls | wc -l
-
-      24
+list of artifacts
+grid_artifacts/defiant-gauss-7889/defiant-gauss-7889-exp0/lightning_logs/hello/events.out.tfevents.1635552049.exp-01fk77rxmcfky4wbdsr04p5g44.15.0
+grid_artifacts/defiant-gauss-7889/defiant-gauss-7889-exp0/results.pt
+grid_artifacts/defiant-gauss-7889/defiant-gauss-7889-exp0/weights.log
+grid_artifacts/defiant-gauss-7889/defiant-gauss-7889-exp0/weights.pt
+file count group by extensions
+      1 0
+      1 log
+      2 pt
 ```
-
