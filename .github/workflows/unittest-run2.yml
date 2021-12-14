@@ -27,7 +27,7 @@ jobs:
           gridai-key: ${{ secrets.GRIDAI_KEY }}
       - id: gridai-run
         run: |
-          gridai.py create_run run2.py --gha True --script-args "  --extension \"['txt', 'log', 'hello', 'log2', 'xyz']\" --sleep \"[0, 60, 120]\" --close_file \"[0,1]\" --flush_file \"[0,1]\" --filename \"['results','result1']\"
+          gridai.py create_run run2.py --gha True --script-args "  --extension \"['txt', 'log', 'hello', 'log2', 'xyz']\" --sleep \"[0, 60, 120]\" --close_file \"[0,1]\" --flush_file \"[0,1]\" --filename \"['results','result1']\""
       - run: |
           cd ${GITHUB_WORKSPACE}
           echo list of artifacts 
