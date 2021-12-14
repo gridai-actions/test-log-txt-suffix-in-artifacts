@@ -1,5 +1,6 @@
 name: 'run.py'
 on:
+  workflow_dispatch:
   push:
     paths:
       - run.py
@@ -18,17 +19,16 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v2     
-      - uses: gridai-actions/gridai-login@main
+      - uses: gridai-actions/gridai-login@v0
         with:
           python-version: ${{ matrix.python-version }}
           python-venv: ${{ matrix.python-venv }}
           gridai-username: ${{ secrets.GRIDAI_USERNAME }} 
           gridai-key: ${{ secrets.GRIDAI_KEY }}
-      - uses: gridai-actions/gridai-run@main
-        with:
-          script-name: run.py
+      - id: gridai-run
+        run: |
+          gridai.py create_run run.py --gha True
       - run: |
-          cd ${GITHUB_WORKSPACE}
           echo list of artifacts 
           find grid_artifacts -type f -print | sort
           echo file count group by extensions

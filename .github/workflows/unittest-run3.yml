@@ -1,5 +1,6 @@
 name: 'run3.py'
 on:
+  workflow_dispatch:
   push:
     paths:
       - run3.py
@@ -24,9 +25,9 @@ jobs:
           python-venv: ${{ matrix.python-venv }}
           gridai-username: ${{ secrets.GRIDAI_USERNAME }} 
           gridai-key: ${{ secrets.GRIDAI_KEY }}
-      - uses: gridai-actions/gridai-run@main
-        with:
-          script-name: run3.py
+      - id: gridai-run
+        run: |
+          gridai.py create_run run3.py --gha True 
       - run: |
           cd ${GITHUB_WORKSPACE}
           echo list of artifacts 

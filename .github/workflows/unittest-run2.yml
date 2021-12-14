@@ -1,5 +1,6 @@
 name: 'run2.py'
 on:
+  workflow_dispatch:
   push:
     paths:
       - run2.py
@@ -24,10 +25,9 @@ jobs:
           python-venv: ${{ matrix.python-venv }}
           gridai-username: ${{ secrets.GRIDAI_USERNAME }} 
           gridai-key: ${{ secrets.GRIDAI_KEY }}
-      - uses: gridai-actions/gridai-run@main
-        with:
-          script-args: --extension "['txt', 'log', 'hello', 'log2', 'xyz']" --sleep "[0, 60, 120]" --close_file "[0,1]"
-          script-name: run2.py
+      - id: gridai-run
+        run: |
+          gridai.py create_run run2.py --gha True --script-args "  --extension \"['txt', 'log', 'hello', 'log2', 'xyz']\" --sleep \"[0, 60, 120]\" --close_file \"[0,1]\""
       - run: |
           cd ${GITHUB_WORKSPACE}
           echo list of artifacts 
