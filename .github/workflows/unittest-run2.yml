@@ -27,7 +27,7 @@ jobs:
           gridai-key: ${{ secrets.GRIDAI_KEY }}
       - id: gridai-run
         run: |
-          gridai.py create_run run2.py --gha True --script-args "  --extension \"['txt', 'log', 'hello', 'log2', 'xyz']\" --sleep \"[0, 60, 120]\" --close_file \"[0,1]\" --flush_file \"[0,1]\""
+          gridai.py create_run run2.py --gha True --script-args "  --extension \"['txt', 'log', 'hello', 'log2', 'xyz']\" --sleep \"[0, 60, 120]\" --close_file \"[0,1]\" --flush_file \"[0,1]\" --filename \"['results','result1']\"
       - run: |
           cd ${GITHUB_WORKSPACE}
           echo list of artifacts 
@@ -40,7 +40,7 @@ jobs:
             echo "no .log files produced"
             exit 1 
           fi
-          if [ "${count_log_suffix}" -ne 12 ]; then 
+          if [ "${count_log_suffix}" -ne 24 ]; then 
             echo "12 .log files were expected.  echo ${count_log_suffix} produced"
             exit 1; 
           fi
