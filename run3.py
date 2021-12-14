@@ -42,7 +42,7 @@ f = open("weights.log", "a")
 f.write("fake weights")
 f.close()
 
-with open("result1.log", "w") as outf:
+with open("results.log", "w") as outf:
     outf.write("Success with results.log!\n")
 outf.close()
 
