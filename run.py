@@ -37,19 +37,19 @@ print('i can run any ML library like numpy, pytorch lightning, sklearn pytorch, 
 print('torch:', torch.rand(1), 'numpy', np.random.rand(1))
 
 # write some artifacts
-f = open("weights.pt", "a")
+f = open("weight1.pt", "a")
 f.write("fake weights")
 f.close()
 
-with open("results.pt", "w") as outf:
+with open("result1.pt", "w") as outf:
     outf.write("Success with results.pt!\n")
 outf.close()
 
 # write some artifacts with .log at the end
-f = open("weights.log", "a")
+f = open("weight2.log", "a")
 f.write("fake weights")
 f.close()
 
-with open("results.log", "w") as outf:
+with open("result2.log", "w") as outf:
     outf.write("Success with results.log!\n")
 outf.close()
